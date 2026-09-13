@@ -1,0 +1,20 @@
+{
+  "name": "hangman-reconstructed-v4",
+  "version": "4.0.0",
+  "description": "Single-player command-line Hangman game in multiple languages",
+  "main": "HangmanReconstructedV4.js",
+  "scripts": {
+    "start": "node HangmanReconstructedV4.js",
+    "ts": "node --experimental-strip-types HangmanReconstructedV4.ts"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "keywords": [
+    "hangman",
+    "game",
+    "command-line"
+  ],
+  "author": "B J Good",
+  "license": "MIT"
+}

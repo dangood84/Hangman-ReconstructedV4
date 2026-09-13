@@ -1,0 +1,62 @@
+# Node.js
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Java
+*.class
+*.jar
+*.war
+
+# C/C++
+*.o
+*.out
+*.a
+*.so
+*.dylib
+hangman_c
+hangman_cpp
+a.out
+
+# Pascal
+*.o
+*.ppu
+HangmanReconstructedV4
+
+# Fortran
+*.o
+*.mod
+hangman_f90
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# VBScript
+# (no build artifacts)
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Build outputs
+*.exe
+*.dll
+*.so
+*.dylib

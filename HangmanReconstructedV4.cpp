@@ -23,14 +23,32 @@ const string DUPLICATE_RIGHT = "Invalid: You have already guessed this letter an
 const string LETTER_WRONG = "Sorry, the word does not contain this letter.";
 const string LETTER_RIGHT = "Well done! A correct letter!";
 
-const vector<string> DEFAULT_WORDS = {
-    "AUTOMOBILE", "NETWORKING", "PRACTICAL",
-    "CONGRESS", "COMMANDER", "STAPLER", "ENTERPRISE",
-    "ESCALATION", "HAPPINESS", "WEDNESDAY", "THUNDER",
-    "MARATHON", "LABORATORY", "HARBINGER", "SUNSHINE",
-    "JOURNEY", "FANTASTIC", "DISCOVERY", "BOOKCASE",
-    "HANGMAN"
-};
+static const vector<string> getDefaultWords() {
+    vector<string> words;
+    words.push_back("AUTOMOBILE");
+    words.push_back("NETWORKING");
+    words.push_back("PRACTICAL");
+    words.push_back("CONGRESS");
+    words.push_back("COMMANDER");
+    words.push_back("STAPLER");
+    words.push_back("ENTERPRISE");
+    words.push_back("ESCALATION");
+    words.push_back("HAPPINESS");
+    words.push_back("WEDNESDAY");
+    words.push_back("THUNDER");
+    words.push_back("MARATHON");
+    words.push_back("LABORATORY");
+    words.push_back("HARBINGER");
+    words.push_back("SUNSHINE");
+    words.push_back("JOURNEY");
+    words.push_back("FANTASTIC");
+    words.push_back("DISCOVERY");
+    words.push_back("BOOKCASE");
+    words.push_back("HANGMAN");
+    return words;
+}
+
+const vector<string> DEFAULT_WORDS = getDefaultWords();
 
 class HangmanGame {
 private:
@@ -76,15 +94,14 @@ public:
     }
     
     string buildHangman(int misses) {
-        vector<string> stages = {
-            "   +---+\n   |   |\n       |\n       |\n       |\n       |\n  =======",
-            "   +---+\n   |   |\n   O   |\n       |\n       |\n       |\n  =======",
-            "   +---+\n   |   |\n   O   |\n   |   |\n       |\n       |\n  =======",
-            "   +---+\n   |   |\n   O   |\n  /|   |\n       |\n       |\n  =======",
-            "   +---+\n   |   |\n   O   |\n  /|\\  |\n       |\n       |\n  =======",
-            "   +---+\n   |   |\n   O   |\n  /|\\  |\n  /    |\n       |\n  =======",
-            "   +---+\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n       |\n  ======="
-        };
+        vector<string> stages;
+        stages.push_back("   +---+\n   |   |\n       |\n       |\n       |\n       |\n  =======");
+        stages.push_back("   +---+\n   |   |\n   O   |\n       |\n       |\n       |\n  =======");
+        stages.push_back("   +---+\n   |   |\n   O   |\n   |   |\n       |\n       |\n  =======");
+        stages.push_back("   +---+\n   |   |\n   O   |\n  /|   |\n       |\n       |\n  =======");
+        stages.push_back("   +---+\n   |   |\n   O   |\n  /|\\  |\n       |\n       |\n  =======");
+        stages.push_back("   +---+\n   |   |\n   O   |\n  /|\\  |\n  /    |\n       |\n  =======");
+        stages.push_back("   +---+\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n       |\n  =======");
         if (misses < 0) misses = 0;
         if (misses > 6) misses = 6;
         return stages[misses];

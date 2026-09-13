@@ -18,7 +18,7 @@ Dim blnGameRunning
 
 Dim objFso, objFileHandle
 Dim strWordListFile, strFileContents
-Dim arrWordList(), intWordCount
+Dim arrWordList, intWordCount
 
 Const WELCOME        = "Welcome to HANGMAN!"
 Const ALPHABET       = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

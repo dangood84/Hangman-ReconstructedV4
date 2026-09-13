@@ -66,13 +66,14 @@ void get_wrong_guesses(GameState *state, char *output) {
 }
 
 char *pick_random_word() {
+    static char result[MAX_WORD_LEN];
     FILE *file = fopen("WordList.txt", "r");
     if (file != NULL) {
         char line[MAX_WORD_LEN];
         int count = 0;
         char words[MAX_WORDS][MAX_WORD_LEN];
         
-        while (fgets(line, sizeof(line), file) != NULL) {
+        while (fgets(line, sizeof(line), file) != NULL && count < MAX_WORDS) {
             char *word = line;
             while (*word && isspace(*word)) word++;
             if (*word) {
@@ -81,19 +82,19 @@ char *pick_random_word() {
                 for (int i = 0; word[i]; i++) {
                     word[i] = toupper((unsigned char)word[i]);
                 }
-                if (count < MAX_WORDS) {
-                    strcpy(words[count], word);
-                    count++;
-                }
+                strcpy(words[count], word);
+                count++;
             }
         }
         fclose(file);
         
         if (count > 0) {
-            return (char *)DEFAULT_WORDS[rand() % count];
+            strcpy(result, words[rand() % count]);
+            return result;
         }
     }
-    return (char *)DEFAULT_WORDS[rand() % MAX_WORDS];
+    strcpy(result, DEFAULT_WORDS[rand() % MAX_WORDS]);
+    return result;
 }
 
 void get_choice(GameState *state, const char *message, char *input) {

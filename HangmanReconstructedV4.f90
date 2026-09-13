@@ -130,10 +130,34 @@ contains
     
     function pick_random_word() result(word)
         character(len=MAX_WORD_LEN) :: word
-        integer :: idx, seed_size, clock, i
+        integer :: idx, seed_size, clock, i, io_stat, word_count
         integer, allocatable :: seed(:)
         real :: temp
+        character(len=MAX_WORD_LEN) :: line
+        character(len=MAX_WORD_LEN), dimension(MAX_WORDS) :: file_words
+        logical :: file_exists
         
+        ! Try to read from WordList.txt first
+        inquire(file='WordList.txt', exist=file_exists)
+        word_count = 0
+        
+        if (file_exists) then
+            open(unit=10, file='WordList.txt', status='old', action='read', iostat=io_stat)
+            if (io_stat == 0) then
+                do while (word_count < MAX_WORDS)
+                    read(10, '(A)', iostat=io_stat) line
+                    if (io_stat /= 0) exit
+                    line = adjustl(line)
+                    if (len_trim(line) > 0) then
+                        word_count = word_count + 1
+                        file_words(word_count) = trim(adjustl(line))
+                    end if
+                end do
+                close(10)
+            end if
+        end if
+        
+        ! Initialize random seed
         call random_seed(size=seed_size)
         allocate(seed(seed_size))
         call system_clock(count=clock)
@@ -141,8 +165,15 @@ contains
         call random_seed(put=seed)
         deallocate(seed)
         call random_number(temp)
-        idx = int(temp * MAX_WORDS) + 1
-        word = DEFAULT_WORDS(idx)
+        
+        ! Pick from file words if available, otherwise use defaults
+        if (word_count > 0) then
+            idx = int(temp * word_count) + 1
+            word = file_words(idx)
+        else
+            idx = int(temp * MAX_WORDS) + 1
+            word = DEFAULT_WORDS(idx)
+        end if
     end function pick_random_word
     
     function upper_case(str) result(upper_str)
